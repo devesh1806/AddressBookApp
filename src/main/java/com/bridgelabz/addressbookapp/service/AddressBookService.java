@@ -27,7 +27,7 @@ public class AddressBookService implements IAddressBookService{
 	public AddressBookData addData(AddressBookDTO addressBookDTO) {
 		int id = addressBookDataList.size()+1;
 		AddressBookData addressBookData = new AddressBookData(id, addressBookDTO);
-		
+		addressBookDataList.add(addressBookData);
 		return addressBookData;
 	}
 
