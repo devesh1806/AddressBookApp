@@ -2,6 +2,8 @@ package com.bridgelabz.addressbookapp.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,14 +43,14 @@ public class AddressBookRestController {
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> createAddressBook(@RequestBody AddressBookDTO addressBookDTO){
+	public ResponseEntity<ResponseDTO> createAddressBook(@Valid @RequestBody AddressBookDTO addressBookDTO){
 		AddressBookData addressBookData = addressBookService.addData(addressBookDTO);
 		ResponseDTO resp = new ResponseDTO("Add call success", addressBookData);
 		return new ResponseEntity<ResponseDTO>(resp,HttpStatus.OK);
 	}
 	
 	@PutMapping("/update/{contactid}")
-	public ResponseEntity<ResponseDTO> updateAddressBook(@PathVariable int contactid,@RequestBody AddressBookDTO addressBookDTO){
+	public ResponseEntity<ResponseDTO> updateAddressBook(@PathVariable int contactid,@Valid @RequestBody AddressBookDTO addressBookDTO){
 		AddressBookData addressBookData = addressBookService.updateData(contactid,addressBookDTO);
 		ResponseDTO resp = new ResponseDTO("Update success", addressBookData);
 		return new ResponseEntity<ResponseDTO>(resp,HttpStatus.OK);
