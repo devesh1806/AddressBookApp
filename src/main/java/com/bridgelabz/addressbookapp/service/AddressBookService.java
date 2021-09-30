@@ -29,9 +29,7 @@ public class AddressBookService implements IAddressBookService{
 
 	@Override
 	public AddressBookData getById(int contactid) {
-		return addressBookDataList.stream().filter(contactData->contactData.getContactid()== contactid)
-				.findFirst()
-				.orElseThrow(()->new AddressBookException("contact not found"));
+		return addressbookrepository.findById(contactid).orElseThrow(()->new AddressBookException("contact not found"));
 	}
 
 	@Override
@@ -44,17 +42,15 @@ public class AddressBookService implements IAddressBookService{
 
 	@Override
 	public AddressBookData updateData(int contactid, AddressBookDTO addressBookDTO) {
-		AddressBookData addressBookData = addressBookDataList.get(contactid-1);
-		addressBookData.setAddress(addressBookDTO.address);
-		addressBookData.setName(addressBookDTO.name);
-		addressBookData.setPhonenumber(addressBookDTO.phonenumber);
-		addressBookDataList.set(contactid-1, addressBookData);
-		return addressBookData;
+		AddressBookData addressbookData=this.getById(contactid);
+		addressbookData.updateAddressBookData(addressBookDTO);
+		return addressbookrepository.save(addressbookData);
 	}
 
 	@Override
 	public void deleteData(int contactid) {
-		addressBookDataList.remove(contactid-1);
+		AddressBookData addressbookData=this.getById(contactid);
+		addressbookrepository.delete(addressbookData);;
 	}
 	
 }

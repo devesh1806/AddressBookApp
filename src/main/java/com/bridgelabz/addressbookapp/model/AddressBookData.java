@@ -14,7 +14,9 @@ import javax.persistence.Table;
 
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Entity
 @Table(name="contacts")
 public @Data class AddressBookData {
