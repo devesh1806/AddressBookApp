@@ -13,6 +13,7 @@ public @ToString class AddressBookDTO {
 	@NotNull(message="address cannot be empty")
 	public String address;
 	@Pattern(regexp="(0/91)?[7-9][0-9]{9}",message="Phone No Invalid")
-	public long phonenumber; 	
+	public long phonenumber;
+	@NotNull(message="relations cannot be empty")
 	public List<String> relations;
 }
