@@ -44,7 +44,14 @@ public class AddressBookRestController {
 		ResponseDTO resp = new ResponseDTO("Get call success", addressBookData);
 		return new ResponseEntity<ResponseDTO>(resp,HttpStatus.OK);
 	}
-	
+	@GetMapping("/department/{department}")
+	public ResponseEntity<ResponseDTO> getAddressBookData(@PathVariable("department") String department)
+	{
+		List<AddressBookData> contactList=null;
+		contactList=addressBookService.getContactByRelation(department);
+		ResponseDTO respDTO=new ResponseDTO("Get call for ID SucessFul",contactList);
+		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
+	}
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> createAddressBook(@Valid @RequestBody AddressBookDTO addressBookDTO){
 		log.debug("AdressBook DTO: "+addressBookDTO.toString());

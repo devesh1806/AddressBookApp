@@ -52,5 +52,9 @@ public class AddressBookService implements IAddressBookService{
 		AddressBookData addressbookData=this.getById(contactid);
 		addressbookrepository.delete(addressbookData);;
 	}
+	@Override
+	public List<AddressBookData> getContactByRelation(String relation) {
+		return addressbookrepository.findcontactByRelation(relation);
+	}
 	
 }
