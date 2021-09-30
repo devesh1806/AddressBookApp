@@ -21,8 +21,11 @@ import com.bridgelabz.addressbookapp.dto.ResponseDTO;
 import com.bridgelabz.addressbookapp.model.AddressBookData;
 import com.bridgelabz.addressbookapp.service.IAddressBookService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/addressbook")
+@Slf4j
 public class AddressBookRestController {
 	
 	@Autowired
@@ -44,6 +47,7 @@ public class AddressBookRestController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> createAddressBook(@Valid @RequestBody AddressBookDTO addressBookDTO){
+		log.debug("AdressBook DTO: "+addressBookDTO.toString());
 		AddressBookData addressBookData = addressBookService.addData(addressBookDTO);
 		ResponseDTO resp = new ResponseDTO("Add call success", addressBookData);
 		return new ResponseEntity<ResponseDTO>(resp,HttpStatus.OK);

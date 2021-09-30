@@ -1,21 +1,16 @@
 package com.bridgelabz.addressbookapp.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.Pattern;
 
 import lombok.Data;
-
-public @Data class AddressBookDTO {
+import lombok.ToString;
+public @ToString class AddressBookDTO {
 	
 	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee name Invalid")
-	private String name;
-	private String address;
-	private long phonenumber; 
-
-	public AddressBookDTO(String name, String address, long phonenumber) {
-		this.name = name;
-		this.address = address;
-		this.phonenumber = phonenumber;
-	}
-		
-	
+	public String name;
+	public String address;
+	public long phonenumber; 	
+	public List<String> relations;
 }
