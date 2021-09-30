@@ -3,20 +3,28 @@ package com.bridgelabz.addressbookapp.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import com.bridgelabz.addressbookapp.exception.AddressBookException;
 import com.bridgelabz.addressbookapp.model.AddressBookData;
+import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class AddressBookService implements IAddressBookService{
+	
+	@Autowired
+	private AddressBookRepository addressbookrepository;
 	
 	List<AddressBookData> addressBookDataList = new ArrayList<>();
 	
 	@Override
 	public List<AddressBookData> getAll() {
-		return addressBookDataList;
+		return addressbookrepository.findAll();
 	}
 
 	@Override
@@ -28,10 +36,10 @@ public class AddressBookService implements IAddressBookService{
 
 	@Override
 	public AddressBookData addData(AddressBookDTO addressBookDTO) {
-		int id = addressBookDataList.size()+1;
-		AddressBookData addressBookData = new AddressBookData(id, addressBookDTO);
+		AddressBookData addressBookData = new AddressBookData(addressBookDTO);
 		addressBookDataList.add(addressBookData);
-		return addressBookData;
+		log.debug(addressBookData.toString()); 
+		return addressbookrepository.save(addressBookData);
 	}
 
 	@Override
