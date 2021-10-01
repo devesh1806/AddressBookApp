@@ -31,7 +31,7 @@ public class AddressBookRestController {
 	@Autowired
 	public IAddressBookService addressBookService;
 	
-	@RequestMapping({"","/","/get"})
+	@GetMapping({"","/","/get"})
 	public ResponseEntity<ResponseDTO> getAddressBook() {
 		List<AddressBookData> addressBookData = addressBookService.getAll();
 		ResponseDTO resp = new ResponseDTO("Get call success", addressBookData);
@@ -44,11 +44,11 @@ public class AddressBookRestController {
 		ResponseDTO resp = new ResponseDTO("Get call success", addressBookData);
 		return new ResponseEntity<ResponseDTO>(resp,HttpStatus.OK);
 	}
-	@GetMapping("/department/{department}")
-	public ResponseEntity<ResponseDTO> getAddressBookData(@PathVariable("department") String department)
+	@GetMapping("/relation/{realtion}")
+	public ResponseEntity<ResponseDTO> getAddressBookData(@PathVariable("relation") String relation)
 	{
 		List<AddressBookData> contactList=null;
-		contactList=addressBookService.getContactByRelation(department);
+		contactList=addressBookService.getContactByRelation(relation);
 		ResponseDTO respDTO=new ResponseDTO("Get call for ID SucessFul",contactList);
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}

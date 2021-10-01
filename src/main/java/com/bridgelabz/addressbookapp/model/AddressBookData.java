@@ -26,7 +26,7 @@ public @Data class AddressBookData {
 	private Integer contactid;
 	private String name;
 	private String address;
-	private long phonenumber;
+	private String phonenumber;
 	
 	@ElementCollection
 	@CollectionTable(name="addressbook_relation",joinColumns=@JoinColumn(name="id"))
@@ -38,9 +38,9 @@ public @Data class AddressBookData {
 	}
 
 	public  void updateAddressBookData(AddressBookDTO addressbookdto) {		
-		this.name=addressbookdto.name;
-		this.phonenumber=addressbookdto.phonenumber;
-		this.address=addressbookdto.address;
-		this.relations=addressbookdto.relations;
+		this.name=addressbookdto.getName();
+		this.phonenumber=addressbookdto.getPhonenumber();
+		this.address=addressbookdto.getAddress();
+		this.relations=addressbookdto.getRelations();
 	}
 }
